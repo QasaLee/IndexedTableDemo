@@ -63,22 +63,38 @@ class AnimalTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
         
-//        // MARK: - My Inplementation
-//        var tIndex = index
-//        var tTitle = title
-//        while animalSectionTitles.index(of: tTitle) == nil && tIndex != 0 {
-//            tIndex -= 1
-//            tTitle = animalIndexTitles[tIndex]
+        // MARK: - My Inplementation
+        var tIndex = index
+        var tTitle = title
+        while animalSectionTitles.index(of: tTitle) == nil && tIndex != 0 {
+            tIndex -= 1
+            tTitle = animalIndexTitles[tIndex]
+        }
+
+        return animalSectionTitles.index(of: tTitle) ?? 0
+        
+//        // MARK: - Teacher's Inplementation
+//        guard let index = animalSectionTitles.index(of: title) else {
+//            return -1
 //        }
 //
-//        return animalSectionTitles.index(of: tTitle) ?? 0
+//        return index
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let headerView = view as! UITableViewHeaderFooterView
         
-        // MARK: - Teacher's Inplementation
-        guard let index = animalSectionTitles.index(of: title) else {
-            return -1
-        }
+        headerView.backgroundView?.backgroundColor = UIColor(red: 223.0/255.0, green: 249.0/255.0, blue: 227.0/255.0, alpha: 0.9)
+//        headerView.backgroundColor = UIColor(red: 223.0/255.0, green: 249.0/255.0, blue: 227.0/255.0, alpha: 0.8) // This line doesn't work!
         
-        return index
+        headerView.textLabel?.font = UIFont(name: "Avenir", size: 25.0)
+        
+        headerView.textLabel?.textColor = UIColor(red: 77.0/255.0, green: 184.0/255.0, blue: 248.0/255.0, alpha: 0.8)
+        
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 48
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -96,6 +112,7 @@ class AnimalTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
         // Configure the cell...
+        cell.backgroundColor = UIColor(red: 223.0/255.0, green: 249.0/255.0, blue: 227.0/255.0, alpha: 0.7)
         let key = animalSectionTitles[indexPath.section]
         let animalValues = animalsDict[key]!
         let animal = animalValues[indexPath.row]
