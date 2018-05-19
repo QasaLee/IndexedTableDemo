@@ -12,6 +12,9 @@ class AnimalTableViewController: UITableViewController {
     
     var animalsDict = [String: [String]]()
     var animalSectionTitles = [String]()
+    let animalIndexTitles = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+    
+    
     
     let animals = ["Bear", "Black Swan", "Buffalo", "Camel", "Cockatoo", "Dog", "Donkey", "Emu", "Giraffe", "Greater Rhea", "Hippopotamus", "Horse", "Koala", "Lion", "Llama", "Manatus", "Meerkat", "Panda", "Peacock", "Pig", "Platypus", "Polar Bear", "Rhinoceros", "Seagull", "Tasmania Devil", "Whale", "Whale Shark", "Wombat"]
     
@@ -46,14 +49,36 @@ class AnimalTableViewController: UITableViewController {
         animalSectionTitles.sort() { $0 < $1 }
     }
     
-    
-    
-    
-    
+
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return animalSectionTitles.count
+    }
+    
+    // Right Sidebar data source
+    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        return animalIndexTitles
+    }
+    
+    override func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
+        
+//        // MARK: - My Inplementation
+//        var tIndex = index
+//        var tTitle = title
+//        while animalSectionTitles.index(of: tTitle) == nil && tIndex != 0 {
+//            tIndex -= 1
+//            tTitle = animalIndexTitles[tIndex]
+//        }
+//
+//        return animalSectionTitles.index(of: tTitle) ?? 0
+        
+        // MARK: - Teacher's Inplementation
+        guard let index = animalSectionTitles.index(of: title) else {
+            return -1
+        }
+        
+        return index
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
